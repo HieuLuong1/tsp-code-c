@@ -1,0 +1,34 @@
+#include<stdio.h>
+int n;
+int x[100][100] = {0};
+int line[100] = {0};
+int v, k;
+int check(int v, int k){
+	for(int i=0;i<k;i++){
+		if(line[i] == v) return 0;
+		if(line[i] + i == v + k) return 0;
+		if(line[i] - i == v - k) return 0;
+	}
+	return 1;
+}
+void try(int k){
+	for(int v=0;v<n;v++){
+		if(check(v,k)){
+			line[k] = v;
+			if(k==n-1){
+				for(int i=0;i<=k;i++){
+					printf("%d",line[i]+1);
+				}
+				printf("\n");
+			}
+			else{
+				try(k+1);
+			}
+		}
+	}
+}
+int main(){
+	scanf("%d",&n);
+	try(0);
+	return 0;
+}
